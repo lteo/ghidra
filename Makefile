@@ -127,12 +127,12 @@ do-build:
 do-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/java
 	unzip -d ${PREFIX}/share/java \
-		${WRKSRC}/build/dist/ghidra_${VERSION}_PUBLIC_*_openbsd64.zip
-	mv ${PREFIX}/share/java/ghidra_${VERSION} ${PREFIX}/share/java/ghidra
-	mv ${PREFIX}/share/java/ghidra/Extensions/Ghidra/ghidra_${VERSION}_PUBLIC_*_SampleTablePlugin.zip \
-		${PREFIX}/share/java/ghidra/Extensions/Ghidra/ghidra_${VERSION}_PUBLIC_${GHIDRA_DATE}_SampleTablePlugin.zip
-	mv ${PREFIX}/share/java/ghidra/Extensions/Ghidra/ghidra_${VERSION}_PUBLIC_*_sample.zip \
-		${PREFIX}/share/java/ghidra/Extensions/Ghidra/ghidra_${VERSION}_PUBLIC_${GHIDRA_DATE}_sample.zip
+		${WRKSRC}/build/dist/ghidra_${VERSION}_DEV_*_openbsd64.zip
+	mv ${PREFIX}/share/java/ghidra_${VERSION}_DEV ${PREFIX}/share/java/ghidra
+.for name in GnuDisassembler SampleTablePlugin SleighDevTools sample
+	mv ${PREFIX}/share/java/ghidra/Extensions/Ghidra/ghidra_${VERSION}_DEV_*_${name}.zip \
+		${PREFIX}/share/java/ghidra/Extensions/Ghidra/ghidra_${VERSION}_DEV_${GHIDRA_DATE}_${name}.zip
+.endfor
 	${INSTALL_SCRIPT} ${WRKSRC}/Ghidra/RuntimeScripts/Linux/ghidraRun \
 		${PREFIX}/share/java/ghidra/ghidraRun
 	ln -s ${TRUEPREFIX}/share/java/ghidra/ghidraRun ${PREFIX}/bin/ghidraRun
