@@ -1,0 +1,14 @@
+$OpenBSD$
+
+Index: gradle/support/ip.gradle
+--- gradle/support/ip.gradle.orig
++++ gradle/support/ip.gradle
+@@ -119,6 +119,8 @@ def Map<String, List<String>> getIpForModule(Project p
+ 		exclude "**/data/build.xml" // language build file (generated for dev only)
+ 		exclude "**/.vs/**"
+ 		exclude "**/*.vcxproj.user"
++		exclude "**/*.orig"
++		exclude "**/*.beforesubst"
+ 	}
+ 	tree.each { file ->
+ 			String ip = getIp(p.projectDir, file)

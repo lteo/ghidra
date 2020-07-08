@@ -5,9 +5,8 @@ ONLY_FOR_ARCHS =	amd64
 
 COMMENT =	software reverse engineering (SRE) framework
 
-VERSION = 	9.0.4
-GHIDRA_DATE =	20190516
-REVISION =	3
+VERSION = 	9.1.2
+GHIDRA_DATE =	20200212
 
 GH_ACCOUNT =	NationalSecurityAgency
 GH_PROJECT =	ghidra
@@ -102,8 +101,8 @@ pre-build:
 .for dir in ${JAR_DIRS}
 	unzip -j ${DISTDIR}/ghidra_${VERSION}_PUBLIC_${GHIDRA_DATE}.zip \
 		-d ${WRKDIR}/flatRepo \
-		ghidra_${VERSION}/Ghidra/${dir:C/-.*$//}/${dir:C/^.*-//}/lib/*.jar \
-		-x ghidra_${VERSION}/Ghidra/${dir:C/-.*$//}/${dir:C/^.*-//}/lib/${dir:C/^.*-//}.jar
+		ghidra_${VERSION}_PUBLIC/Ghidra/${dir:C/-.*$//}/${dir:C/^.*-//}/lib/*.jar \
+		-x ghidra_${VERSION}_PUBLIC/Ghidra/${dir:C/-.*$//}/${dir:C/^.*-//}/lib/${dir:C/^.*-//}.jar
 .endfor
 .for name in csframework hfsx_dmglib hfsx iharder-base64
 	cp ${WRKSRC}/GPL/DMG/data/lib/catacombae_${name}.jar \
