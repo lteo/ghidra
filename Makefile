@@ -97,19 +97,20 @@ pre-build:
 	${SUBST_CMD} ${WRKDIR}/repos.gradle \
 		${WRKSRC}/GPL/nativeBuildProperties.gradle \
 		${WRKSRC}/Ghidra/Framework/Help/src/main/java/help/GHelpBuilder.java
-	mkdir ${WRKDIR}/{flatRepo,gradle,home}
+	mkdir ${WRKDIR}/{gradle,home}
+	mkdir ${WRKSRC}/flatRepo
 .for dir in ${JAR_DIRS}
 	unzip -j ${DISTDIR}/ghidra_${VERSION}_PUBLIC_${GHIDRA_DATE}.zip \
-		-d ${WRKDIR}/flatRepo \
+		-d ${WRKSRC}/flatRepo \
 		ghidra_${VERSION}_PUBLIC/Ghidra/${dir:C/-.*$//}/${dir:C/^.*-//}/lib/*.jar \
 		-x ghidra_${VERSION}_PUBLIC/Ghidra/${dir:C/-.*$//}/${dir:C/^.*-//}/lib/${dir:C/^.*-//}.jar
 .endfor
 .for name in csframework hfsx_dmglib hfsx iharder-base64
 	cp ${WRKSRC}/GPL/DMG/data/lib/catacombae_${name}.jar \
-		${WRKDIR}/flatRepo/${name}.jar
+		${WRKSRC}/flatRepo/${name}.jar
 .endfor
 .for jar_file in ${JAR_DISTFILES:C/{.*}//}
-	cp ${DISTDIR}/${jar_file} ${WRKDIR}/flatRepo
+	cp ${DISTDIR}/${jar_file} ${WRKSRC}/flatRepo
 .endfor
 	mkdir -p ${WRKDIR}/ghidra.bin/Ghidra/Features/GhidraServer
 	cp ${DISTDIR}/yajsw-stable-${YAJSW_VER}.zip \
